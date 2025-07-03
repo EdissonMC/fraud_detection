@@ -42,6 +42,7 @@ class TransactionConfig:
             self.merchants = ['Netflix', 'Éxito', 'Amazon', 'Spotify', 
                              'MercadoLibre', 'Banco_ATM', 'Supermercado_Local']
 
+
 class SyntheticDataGenerator:
     """This class generates synthetic financial transaction data based on configuration."""
     def __init__(self, config:TransactionConfig):
