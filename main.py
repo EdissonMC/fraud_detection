@@ -92,3 +92,31 @@ class SyntheticDataGenerator:
             'merchant': random.choice(self.config.merchants),
             'transaction_type': 'normal'
         }
+        
+    def _generate_anomalous_transactions(self) -> List[Dict]:
+        """Generates anomalous transactions for testing"""
+        anomalous_data = []
+
+        # High-value transaction
+        anomalous_data.append({
+            'customer_id': 3,
+            'timestamp': datetime(2025, 6, 15, 3, 25),
+            'amount': 8000.00,
+            'city': 'Lagos',
+            'channel': 'app',
+            'merchant': 'Transferencia_Internacional',
+            'transaction_type': 'anomalous'
+        })
+
+        # Odd-hour foreign transaction
+        anomalous_data.append({
+            'customer_id': 7,
+            'timestamp': datetime(2025, 6, 20, 2, 15),
+            'amount': 2500.00,
+            'city': 'Miami',
+            'channel': 'web',
+            'merchant': 'Casino_Online',
+            'transaction_type': 'anomalous'
+        })
+
+        return anomalous_data
