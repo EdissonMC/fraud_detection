@@ -42,7 +42,6 @@ class TransactionConfig:
             self.merchants = ['Netflix', 'Éxito', 'Amazon', 'Spotify', 
                              'MercadoLibre', 'Banco_ATM', 'Supermercado_Local']
 
-
 class SyntheticDataGenerator:
     """This class generates synthetic financial transaction data based on configuration."""
     def __init__(self, config:TransactionConfig):
@@ -50,3 +49,24 @@ class SyntheticDataGenerator:
         self.customers=None
         self.transactions = None
         self.devices= None
+        
+def generate_transactions(self) -> pd.DataFrame:
+    """
+    Generates synthetic transactions for all customers
+    """
+    transaction_data = []
+
+    # Iterar directamente sobre los pares (customer_id, city)
+    for customer_id, customer_city in zip(self.customers['customer_id'], self.customers['city']):
+        
+        # Normal transactions
+        for _ in range(self.config.transactions_per_customer):
+            transaction = self._generate_normal_transaction(customer_id, customer_city)
+            transaction_data.append(transaction)
+
+    # Add a few anomalous ones
+    anomalous_transactions = self._generate_anomalous_transactions()
+    transaction_data.extend(anomalous_transactions)
+
+    self.transactions = pd.DataFrame(transaction_data)
+    return self.transactions
