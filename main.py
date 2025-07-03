@@ -120,3 +120,27 @@ class SyntheticDataGenerator:
         })
 
         return anomalous_data
+
+    def generate_device_data(self) -> pd.DataFrame:
+        """
+        Generates device metadata per customer
+        """
+        devices_data = []
+
+        for customer_id in self.customers['customer_id']:
+            num_devices = random.randint(1, 3)
+
+            for i in range(num_devices):
+                device_data = {
+                    'customer_id': customer_id,
+                    'device_id': f'device_{customer_id}_{i+1}',
+                    'device_type': random.choice(['smartphone', 'tablet', 'laptop']),
+                    'os': random.choice(['Android', 'iOS', 'Windows']),
+                    'location': random.choice(self.config.cities),
+                    'last_seen': datetime.now() - timedelta(days=random.randint(0, 10)),
+                    'is_trusted': random.choice([True, True, True, False])
+                }
+                devices_data.append(device_data)
+
+        self.devices = pd.DataFrame(devices_data)
+        return self.devices
